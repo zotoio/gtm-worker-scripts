@@ -11,7 +11,8 @@ if grep -q "sls-package" ./package.json; then
     echo "found npm script for packaging release.."
     yarn sls-package >> ${OUT_FILE} 2>&1 || echo "failed $PACKAGE..";
     echo "release package created, uploading to s3://$S3_DEPENDENCY_BUCKET/releases/$PACKAGE"
-    https_proxy=$AWS_S3_PROXY find /usr/workspace/clone/output/packages -name "$PACKAGE-*" | xargs -I {} aws s3 cp {}  s3://$S3_DEPENDENCY_BUCKET/releases/$PACKAGE/ 2>&1 || echo "failed uploading $PACKAGE..";
+    https_proxy=$AWS_S3_PROXY aws s3 cp /usr/workspace/clone/output/packages \
+        s3://$S3_DEPENDENCY_BUCKET/releases/$PACKAGE/ --recursive --exclude "*" --include "$PACKAGE-*" --exclude "*/*"
     echo "release upload completed!"
 else
     echo "npm script for packaging $PACKAGE is missing" >> ${OUT_FILE}
