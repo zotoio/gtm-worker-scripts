@@ -12,7 +12,7 @@ if grep -q "sls-package" ./package.json; then
     yarn sls-package >> ${OUT_FILE} 2>&1 || echo "failed $PACKAGE..";
     echo "release package created, uploading to s3://$S3_DEPENDENCY_BUCKET/releases/$PACKAGE"
     for i in /usr/workspace/clone/output/packages/$PACKAGE-*; do
-        https_proxy=$AWS_S3_PROXY aws s3 cp ${i} s3://$S3_DEPENDENCY_BUCKET/releases/$PACKAGE/${i};
+        https_proxy=$AWS_S3_PROXY aws s3 cp ${i} s3://$S3_DEPENDENCY_BUCKET/releases/$PACKAGE//$(basename $i);
     done
     echo "release upload completed!"
 else
