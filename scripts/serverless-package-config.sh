@@ -8,6 +8,7 @@ echo "Collecting package configuration for $PACKAGE ($STAGE).."
 # aws ssm put-parameter --name "/serverless/sample-http/dev/SAMPLE_VAR" --type "String" --value "some value"
 # aws ssm get-parameters-by-path --with-decryption --path /serverless/$PACKAGE/$STAGE
 
+mkdir -p /usr/workspace/clone/output/$PACKAGE
 touch /usr/workspace/clone/output/$PACKAGE/set-env-$STAGE.sh
 aws ssm get-parameters-by-path --with-decryption  --path /serverless/${PACKAGE}/${STAGE} \
 | jq -r '.Parameters| .[] | "export " + .Name + "=\"" + .Value + "\""  ' \
