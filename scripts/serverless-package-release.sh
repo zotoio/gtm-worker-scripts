@@ -5,7 +5,7 @@ PACKAGE=$1
 echo 'Packaging ' $PACKAGE ' for release.';
 cd /usr/workspace/clone/packages/$PACKAGE
 
-source ./serverless-package-config.sh $PACKAGE "prod"
+source /usr/workspace/serverless-package-config.sh $PACKAGE "prod"
 
 if grep -q "sls-package" ./package.json; then
     echo "found npm script for packaging release.."
