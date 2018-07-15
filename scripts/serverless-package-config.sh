@@ -25,7 +25,7 @@ case "$SLS_CONFIG_TYPE" in
         # a local docker based example can be started with ./docker-spring-config.sh reading /config/**
         # use SPRING_CONFIG_ENDPOINT=http://localhost:8888
         echo "Using spring config server.."
-        curl ${SPRING_CONFIG_ENDPOINT}/serverless/${PACKAGE}-${STAGE}.json \
+        curl ${SLS_SPRING_CONFIG_ENDPOINT}/serverless/${PACKAGE}-${STAGE}.json \
         | jq -r 'keys[] as $k | select($k != "spring") | "export " + $k + "=\"" + .[$k] + "\""' \
         >> /usr/workspace/clone/output/$PACKAGE/set-env-$STAGE.sh
         ;;
