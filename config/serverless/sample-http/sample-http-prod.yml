@@ -1,0 +1,10 @@
+---
+spring:
+  profile: "prod"
+  profiles:
+      include:
+        - "global"
+
+---
+loglevel: "info"
+tablename: "prodtable"

@@ -1,0 +1,6 @@
+---
+spring:
+  profile: "global"
+
+---
+servicename: "sample-http"

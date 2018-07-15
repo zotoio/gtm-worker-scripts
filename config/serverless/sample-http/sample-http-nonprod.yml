@@ -1,0 +1,9 @@
+---
+spring:
+  profile: "nonprod"
+  profiles:
+      include:
+        - "global"
+
+---
+loglevel: "debug"

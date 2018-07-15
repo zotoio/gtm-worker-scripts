@@ -1,0 +1,8 @@
+---
+spring:
+  profiles:
+    include:
+      - "prod"
+
+---
+tablename: "prodgreentable"
